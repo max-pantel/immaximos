@@ -1,0 +1,400 @@
+---
+// src/pages/work/experimental.astro
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experimental - maximos 'halbert' pantelidakis</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        line-height: 1.6;
+      }
+      
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+      
+      /* Header */
+      header {
+        padding: 40px 0;
+        border-bottom: 1px solid #333;
+      }
+      
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .back-link {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+      
+      .back-link:hover {
+        color: #fff;
+      }
+      
+      .logo {
+        font-size: 18px;
+        font-weight: 400;
+        text-decoration: none;
+        color: #fff;
+      }
+      
+      /* Page Title */
+      .page-header {
+        padding: 60px 0 40px 0;
+        text-align: center;
+      }
+      
+      .page-header h1 {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 300;
+        margin-bottom: 15px;
+      }
+      
+      .page-header p {
+        font-size: 18px;
+        color: #999;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      
+      /* Section Headers */
+      .section-header {
+        margin: 80px 0 30px 0;
+        text-align: center;
+      }
+      
+      .section-header h2 {
+        font-size: 28px;
+        font-weight: 300;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      
+      /* Main grid container styling */
+      .work-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px; /* increased slightly to make separation visible */
+          margin: 0 auto 80px auto;
+          max-width: 75%; /* adjusted from 50% */
+          justify-content: center;
+        }
+
+        .work-item {
+          position: relative;
+          overflow: hidden;
+          display: block;
+          background: #111;
+          cursor: pointer;
+          width: 100%;
+          padding: 2px; /* added minimal padding */
+          box-sizing: border-box;
+        }
+      
+      /* Different aspect ratios based on content */
+      .work-item.video-widescreen {
+        aspect-ratio: 16/9;
+      }
+      
+      .work-item.image-square {
+        aspect-ratio: 1/1;
+      }
+      .work-item img,
+      .work-item video,
+      .work-item iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        object-fit: contain;
+        background: #111;
+        transition: filter 0.3s ease, transform 0.3s ease;
+      }
+
+      .work-item:hover img,
+      .work-item:hover video {
+        filter: brightness(1.1);
+        transform: scale(1.02);
+      }
+      
+      footer {
+        border-top: 1px solid #333;
+        padding: 40px 0;
+        text-align: center;
+        color: #666;
+      }
+      
+      @media (max-width: 1200px) {
+        .work-grid {
+          max-width: 85%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .work-grid {
+          grid-template-columns: 1fr;
+          max-width: 100%;
+        }
+        
+        .page-header {
+          padding: 40px 0 30px 0;
+        }
+        
+        .page-header h1 {
+          font-size: 32px;
+        }
+        
+        .page-header p {
+          font-size: 16px;
+        }
+        
+        .section-header {
+          margin: 60px 0 20px 0;
+        }
+        
+        .section-header h2 {
+          font-size: 24px;
+        }
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/" class="back-link">← Back to Home</a>
+          <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+        </div>
+      </header>
+      
+      <section class="page-header">
+        <h1>Experimental (UNDER CONSTRUCTION)</h1>
+        <p>Works inspired by surrealist automatism and DADA. Collage, stop-motion and digital animations. More work will be added here if I ever manage to find my files.</p>
+      </section>
+      
+      <!-- Commission Work Section -->
+      <section class="section-header">
+        <h2>Commission Work</h2>
+      </section>
+    </div>
+    
+    <!-- Grid outside container for proper centering -->
+    <div class="work-grid" id="commissionGrid">
+      <!-- Commission items will be added here by JavaScript -->
+    </div>
+    
+    <div class="container">
+      <!-- Personal Projects Section -->
+      <section class="section-header">
+        <h2>Personal Projects</h2>
+      </section>
+    </div>
+    
+    <div class="work-grid" id="personalGrid">
+      <div class="work-item video-widescreen">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/730570976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Language is non-verbal"></iframe>
+        </div>
+      </div>
+    
+      <div class="work-item video-square">
+        <div style="padding:100% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/707499084?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" 
+          width="500" 
+          height="500" frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" 
+          title="Dive into thought"></iframe>
+        </div>
+      </div>
+    
+      <div class="work-item video-widescreen">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/707497836?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Rabbit Hole"></iframe>
+        </div>
+      </div>
+    </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    
+    <div class="container">
+    
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Maximos Pantelidakis. All rights reserved.</p>
+      </div>
+    </footer>
+    
+    <script>
+      // Work data with dimensions
+      const works = {
+        commission: [
+          {
+            type: 'video',
+            filename: 'lord-of-flies.mp4',
+            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
+            title: 'Lord of Flies',
+            aspectClass: 'video-widescreen'
+          },
+          {
+            type: 'video',
+            filename: 'par-tex.mp4',
+            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
+            title: 'Par-Tex',
+            aspectClass: 'video-widescreen'
+          },
+          {
+            type: 'image',
+            filename: 'redflag.jpg',
+            link: 'https://dribbble.com/shots/25009811-Collage-Album-cover-for-an-upcoming-single',
+            title: 'Red Flag',
+            aspectClass: 'image-square'
+          },
+          {
+            type: 'video',
+            filename: 'descartes.mp4',
+            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
+            title: 'Descartes',
+            aspectClass: 'video-widescreen'
+          }
+        ],
+        personal: [
+          {
+            type: 'image',
+            filename: 'child-dreaming.jpg',
+            title: 'Child Dreaming',
+            aspectClass: 'image-square'
+          },
+          {
+            type: 'image',
+            filename: 'recalling.jpg',
+            title: 'Recalling',
+            aspectClass: 'image-square'
+          },
+          {
+            type: 'image',
+            filename: 'suffer.jpg',
+            title: 'Suffer',
+            aspectClass: 'image-square'
+          }
+        ]
+      };
+      
+      function getMediaPath(filename) {
+        return `/work/experimental/${filename}`;
+      }
+      
+      function createWorkItem(work, category) {
+        const item = document.createElement('div');
+        item.className = `work-item ${work.aspectClass}`;
+        
+        if (work.type === 'video') {
+          const video = document.createElement('video');
+          video.src = getMediaPath(work.filename);
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.setAttribute('playsinline', '');
+          video.setAttribute('webkit-playsinline', '');
+          
+          // Force load
+          video.load();
+          
+          // Play on hover
+          item.addEventListener('mouseenter', () => {
+            video.play().catch(e => console.log('Video play error:', e));
+          });
+          
+          item.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+          });
+          
+          // Debug: log when video can play
+          video.addEventListener('canplay', () => {
+            console.log('Video ready:', work.filename);
+          });
+          
+          video.addEventListener('error', (e) => {
+            console.error('Video load error:', work.filename, e);
+          });
+          
+          item.appendChild(video);
+        } else {
+          const img = document.createElement('img');
+          img.src = getMediaPath(work.filename);
+          img.alt = work.title;
+          
+          img.addEventListener('error', (e) => {
+            console.error('Image load error:', work.filename, e);
+          });
+          
+          item.appendChild(img);
+        }
+        
+        // Add click handler for commission work
+        if (work.link) {
+          item.style.cursor = 'pointer';
+          item.addEventListener('click', () => {
+            window.open(work.link, '_blank');
+          });
+        } else {
+          item.style.cursor = 'default';
+        }
+        
+        return item;
+      }
+      
+      function renderWorks() {
+        const commissionGrid = document.getElementById('commissionGrid');
+        const personalGrid = document.getElementById('personalGrid');
+        
+        // Render commission work
+        works.commission.forEach(work => {
+          const item = createWorkItem(work, 'commission');
+          commissionGrid.appendChild(item);
+        });
+        
+        // Render personal projects
+        works.personal.forEach(work => {
+          const item = createWorkItem(work, 'personal');
+          personalGrid.appendChild(item);
+        });
+      }
+      
+      // Initialize
+      renderWorks();
+    </script>
+  </body>
+</html>

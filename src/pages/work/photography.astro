@@ -1,0 +1,562 @@
+---
+// src/pages/work/photography.astro
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photography - maximos 'halbert' pantelidakis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        line-height: 1.6;
+      }
+      
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+      
+      /* Header */
+      header {
+        padding: 40px 0;
+        border-bottom: 1px solid #333;
+      }
+      
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .back-link {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+      
+      .back-link:hover {
+        color: #fff;
+      }
+      
+      .logo {
+        font-size: 18px;
+        font-weight: 400;
+        text-decoration: none;
+        color: #fff;
+      }
+      
+      /* Page Title */
+      .page-header {
+        padding: 60px 0 40px 0;
+        text-align: center;
+      }
+      
+      .page-header h1 {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 300;
+        margin-bottom: 15px;
+      }
+      
+      .page-header p {
+        font-size: 18px;
+        color: #999;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      /* Flexbox Grid - Reliable and Simple */
+      .photo-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 60px auto 80px auto;
+        max-width: 1400px;
+        padding: 0 40px;
+        box-sizing: border-box;
+      }
+      
+      .photo-item {
+        flex: 1 1 calc(33.333% - 4px);
+        max-width: calc(33.333% - 4px);
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        box-sizing: border-box;
+      }
+      
+      .photo-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: filter 0.3s ease, transform 0.3s ease;
+        object-fit: contain;
+      }
+      
+      .photo-item:hover img {
+        filter: brightness(1.1);
+        transform: scale(1.02);
+      }
+      
+      /* Fullscreen Lightbox */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+      }
+      
+      .lightbox.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .lightbox-image {
+        max-width: 100%;
+        max-height: 85vh;
+        object-fit: contain;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9);
+      }
+      
+      .lightbox-caption {
+        margin-top: 20px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        max-width: 600px;
+      }
+      
+      .lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 10px;
+        line-height: 1;
+        transition: opacity 0.3s;
+        z-index: 10;
+      }
+      
+      .lightbox-close:hover {
+        opacity: 0.7;
+      }
+      
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        font-size: 40px;
+        padding: 20px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        z-index: 10;
+      }
+      
+      .lightbox-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      .lightbox-prev {
+        left: 30px;
+      }
+      
+      .lightbox-next {
+        right: 30px;
+      }
+      
+      /* Confirmation Modal */
+      .confirm-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 30px 40px;
+        z-index: 3000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        text-align: center;
+      }
+      
+      .confirm-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .confirm-modal p {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #fff;
+      }
+      
+      .confirm-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+      
+      .confirm-btn {
+        padding: 10px 25px;
+        border: 1px solid #666;
+        background: #222;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+        font-family: inherit;
+      }
+      
+      .confirm-btn:hover {
+        background: #333;
+      }
+      
+      .confirm-btn.yes {
+        border-color: #fff;
+      }
+      
+      footer {
+        border-top: 1px solid #333;
+        padding: 40px 0;
+        text-align: center;
+        color: #666;
+      }
+      
+      @media (max-width: 1024px) {
+        .photo-grid {
+          column-count: 2;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 20px;
+        }
+        
+        .photo-grid {
+          column-count: 1;
+        }
+        
+        .page-header {
+          padding: 40px 0 30px 0;
+        }
+        
+        .lightbox-nav {
+          font-size: 30px;
+          padding: 15px;
+        }
+        
+        .lightbox-prev {
+          left: 10px;
+        }
+        
+        .lightbox-next {
+          right: 10px;
+        }
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/" class="back-link">← Back to Home</a>
+          <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+        </div>
+      </header>
+      
+      <section class="page-header">
+        <h1>Photography (UNDER CONSTRUCTION)</h1>
+        <p>Urbex and street photography</p>
+      </section>
+    </div>
+    
+    <!-- Masonry Grid -->
+    <div class="photo-grid" id="photoGrid">
+      <!-- Photos will be dynamically loaded here -->
+    </div>
+    
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Maximos Pantelidakis. All rights reserved.</p>
+      </div>
+    </footer>
+    
+    <!-- Fullscreen Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="prevPhoto">‹</button>
+      <button class="lightbox-nav lightbox-next" id="nextPhoto">›</button>
+      <div class="lightbox-content">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="confirm-modal" id="confirmModal">
+      <p>You're going to be transferred to my Flickr page. Proceed?</p>
+      <div class="confirm-buttons">
+        <button class="confirm-btn yes" id="confirmYes">Yes</button>
+        <button class="confirm-btn" id="confirmNo">No</button>
+      </div>
+    </div>
+    
+    <script>
+      // Photo data - matched with your local files by ID
+      const photos = [
+        {
+          id: '53337560396',
+          filename: '53337560396_67699543ce_h.jpg',
+          title: 'Подъём',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/53337560396'
+        },
+        {
+          id: '52243743044',
+          filename: '52243743044_87ef9e834e_k.jpg',
+          title: 'Finnish Line',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/52243743044'
+        },
+        {
+          id: '52242483197',
+          filename: '52242483197_8e663a13d0_k.jpg',
+          title: 'Birth in Venice',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/52242483197'
+        },
+        {
+          id: '51933457027',
+          filename: '51933457027_27af33fff4_b.jpg',
+          title: 'Flowral Dreams',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/51933457027'
+        },
+        {
+          id: '51934436166',
+          filename: '51934436166_3bd7f092da_b.jpg',
+          title: 'The Idlers of the Silicon Valley',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/51934436166'
+        },
+        {
+          id: '51158141595',
+          filename: '51158141595_890029bf1d_k.jpg',
+          title: 'Bibliothique parifique',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/51158141595'
+        },
+        {
+          id: '49326447933',
+          filename: '49326447933_cec5db8923_k.jpg',
+          title: 'Λειχανή',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/49326447933'
+        },
+        {
+          id: '49326803796',
+          filename: '49326803796_2147368f38_k.jpg',
+          title: 'Eleanor Rigby Lives Here',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/49326803796'
+        },
+        {
+          id: '49244505296',
+          filename: '49244505296_f9874cccce_k.jpg',
+          title: 'Sussicran',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/49244505296'
+        },
+        {
+          id: '49169791287',
+          filename: '49169791287_030c11c3de_b.jpg',
+          title: 'Josip Broz Conference Room',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/49169791287'
+        },
+        {
+          id: '49016709906',
+          filename: '49016709906_a279f175dd_b.jpg',
+          title: 'Industrial Shadows on Child Memories',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/49016709906'
+        },
+        {
+          id: '46030352534',
+          filename: '46030352534_dd43dc1b64_k.jpg',
+          title: "God's a Vertebrate",
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/46030352534'
+        },
+        {
+          id: '32743943561',
+          filename: '32743943561_0b8823c87e_k.jpg',
+          title: "Slowly Sleeping on a Foggy Road to a Lonely Home",
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/32743943561'
+        },
+        {
+          id: '32649899314',
+          filename: '32649899314_06861e0c17_k.jpg',
+          title: 'A frame inside a frame holding a dog',
+          flickrUrl: 'https://www.flickr.com/photos/halbertmax/32649899314'
+        }
+      ];
+      
+      let currentPhotoIndex = 0;
+      let pendingFlickrUrl = '';
+      
+      // Build image path from local files
+      function getImagePath(photo) {
+        return `/work/photography/${photo.filename}`;
+      }
+      
+      // Render photos in grid
+      function renderPhotos() {
+        const grid = document.getElementById('photoGrid');
+        
+        photos.forEach((photo, index) => {
+          const item = document.createElement('div');
+          item.className = 'photo-item';
+          item.dataset.index = index;
+          
+          const img = document.createElement('img');
+          img.src = getImagePath(photo);
+          img.alt = photo.title;
+          
+          item.appendChild(img);
+          item.addEventListener('click', () => openLightbox(index));
+          grid.appendChild(item);
+        });
+      }
+      
+      // Open lightbox
+      function openLightbox(index) {
+        currentPhotoIndex = index;
+        const photo = photos[index];
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        
+        lightboxImage.src = getImagePath(photo);
+        lightboxCaption.textContent = photo.title;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      // Close lightbox
+      function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+      
+      // Navigate photos
+      function navigatePhoto(direction) {
+        currentPhotoIndex += direction;
+        if (currentPhotoIndex < 0) currentPhotoIndex = photos.length - 1;
+        if (currentPhotoIndex >= photos.length) currentPhotoIndex = 0;
+        
+        const photo = photos[currentPhotoIndex];
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        
+        lightboxImage.src = getImagePath(photo);
+        lightboxCaption.textContent = photo.title;
+      }
+      
+      // Show confirmation modal
+      function showConfirmModal() {
+        const confirmModal = document.getElementById('confirmModal');
+        pendingFlickrUrl = photos[currentPhotoIndex].flickrUrl;
+        confirmModal.classList.add('active');
+      }
+      
+      // Hide confirmation modal
+      function hideConfirmModal() {
+        const confirmModal = document.getElementById('confirmModal');
+        confirmModal.classList.remove('active');
+        pendingFlickrUrl = '';
+      }
+      
+      // Event Listeners
+      document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+      document.getElementById('prevPhoto').addEventListener('click', () => navigatePhoto(-1));
+      document.getElementById('nextPhoto').addEventListener('click', () => navigatePhoto(1));
+      
+      // Click on lightbox image to show confirm modal
+      document.getElementById('lightboxImage').addEventListener('click', showConfirmModal);
+      
+      // Confirm modal buttons
+      document.getElementById('confirmYes').addEventListener('click', () => {
+        window.open(pendingFlickrUrl, '_blank');
+        hideConfirmModal();
+        closeLightbox();
+      });
+      
+      document.getElementById('confirmNo').addEventListener('click', hideConfirmModal);
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        const confirmModal = document.getElementById('confirmModal');
+        
+        if (lightbox.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            if (confirmModal.classList.contains('active')) {
+              hideConfirmModal();
+            } else {
+              closeLightbox();
+            }
+          } else if (e.key === 'ArrowLeft') {
+            navigatePhoto(-1);
+          } else if (e.key === 'ArrowRight') {
+            navigatePhoto(1);
+          }
+        }
+      });
+      
+      // Click outside lightbox to close
+      document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox') {
+          closeLightbox();
+        }
+      });
+      
+      // Initialize
+      renderPhotos();
+    </script>
+  </body>
+</html>

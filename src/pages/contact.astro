@@ -1,0 +1,167 @@
+---
+// src/pages/contact.astro
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - maximos 'halbert' pantelidakis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 40px 0;
+        border-bottom: 1px solid #333;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .back-link,
+      .logo {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .back-link:hover,
+      .logo:hover {
+        color: #fff;
+      }
+
+      /* PAGE STRUCTURE */
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 120px 20px 80px; /* space below header */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      iframe {
+        max-width: 100%;
+        border: none;
+      }
+
+      .email {
+        font-size: 20px;
+        font-weight: 400;
+        color: #fff;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+      }
+
+      .links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 10px;
+      }
+
+      .links a {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s, text-decoration-color 0.3s;
+      }
+
+      .links a:hover {
+        color: #f8e48c; /* light yellow */
+        text-decoration: underline;
+        text-decoration-color: #f8e48c;
+      }
+
+      video {
+        margin-top: 25px;
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      @media (max-width: 768px) {
+        main {
+          padding: 140px 20px 60px;
+          gap: 1.5rem;
+        }
+
+        .email {
+          font-size: 18px;
+        }
+
+        .links {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        video {
+          margin-top: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <a href="/" class="back-link">← Back to Home</a>
+        <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+      </div>
+    </header>
+
+    <main>
+        <iframe 
+        src="https://embed.europeana.eu/916120/pm_photo_POST032028" 
+        width="300" 
+        height="206" 
+        frameborder="0"
+        loading ="lazy"
+        ></iframe>
+
+      <p class="email">pantel.maxim@gmail.com</p>
+
+      <div class="links">
+        <a href="https://dribbble.com/maxhalbert" target="_blank" rel="noopener noreferrer">dribbble</a>
+        <a href="https://www.researchgate.net/profile/Maximos-Georgios-Pantelidakis-Chatzopoulos?ev=hdr_xprf" target="_blank" rel="noopener noreferrer">researchgate</a>
+        <a href="https://www.flickr.com/photos/halbertmax/" target="_blank" rel="noopener noreferrer">flickr</a>
+      </div>
+
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="/contact/eisenstein.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+---
+// src/pages/about.astro
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - maximos 'halbert' pantelidakis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 40px 0;
+        border-bottom: 1px solid #333;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .back-link,
+      .logo {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .back-link:hover,
+      .logo:hover {
+        color: #fff;
+      }
+
+      /* PAGE TITLE */
+      .page-header {
+        margin-top: 140px;
+        text-align: center;
+      }
+
+      .page-header h1 {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 300;
+        color: #fff;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+      }
+
+      /* BACKGROUND */
+      .background {
+        position: fixed;
+        inset: 0;
+        background: url("/work/photography/53337560396_67699543ce_h.jpg") center center / cover no-repeat;
+        z-index: -2;
+      }
+
+      .background::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7); /* the black overlay */
+        z-index: -1;
+      }
+
+      /* TEXT SECTION */
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20vh 40px; /* space top/bottom */
+        text-align: center;
+      }
+
+      .content p {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 1.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          padding: 0 20px;
+        }
+
+        .page-header {
+          margin-top: 120px;
+        }
+
+        .content {
+          padding: 15vh 20px;
+        }
+
+        .content p {
+          font-size: 16px;
+          line-height: 1.6;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="back-link">← Back to Home</a>
+        <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+      </div>
+    </header>
+
+    <section class="page-header">
+      <h1>About</h1>
+    </section>
+
+    <main class="content">
+      <p>I'm Maximos — self-taught video artist and Biologist (MSc) with an insatiable curiosity and a love for knowledge.</p>
+      <p>I started using video editors at the age of 12 to re-create kitsch ads I saw on Greek TV. At 16 I made my first music video for the late infamous Greek rapper 'Vdeligma'. Our collaboration kickstarted my way into music videos, but I didn't stop there.</p>
+      <p>I taught myself everything I couldn’t do. I learned video editing, colour grading, motion graphics, VFX, SFX, animation (2D), collage, stop-motion...</p>
+      <p>How to make dialectical (Eisensteinian) editing, associative images (borrowing from DADA). I went further.</p>
+      <p>I referenced books, films, poetry and my studies in Biology. I left easter eggs in my art for the bored flâneur — as if searching in a cabinet of curiosities.</p>
+      <p>I am — anytime — open to collaboration. For commission or artistic projects. Always happy to learn and share.</p>
+    </main>
+  </body>
+</html>
