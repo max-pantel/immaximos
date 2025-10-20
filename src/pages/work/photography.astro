@@ -1,5 +1,6 @@
 ---
 // src/pages/work/photography.astro
+const base = Astro.base;
 ---
 
 <html lang="en">
@@ -304,8 +305,8 @@
     <div class="container">
       <header>
         <div class="header-content">
-          <a href="/" class="back-link">← Back to Home</a>
-          <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+          <a href="/immaximos/" class="back-link">← Back to Home</a>
+          <a href="/immaximos/" class="logo">maximos 'halbert' pantelidakis</a>
         </div>
       </header>
       
@@ -440,7 +441,7 @@
       
       // Build image path from local files
       function getImagePath(photo) {
-        return `/work/photography/${photo.filename}`;
+        return `../work/photography/${photo.filename}`;
       }
       
       // Render photos in grid
