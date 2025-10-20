@@ -1,11 +1,13 @@
 ---
 // src/pages/about.astro
+const BASE = '/immaximos/'; // must match astro.config.mjs base
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About - maximos 'halbert' pantelidakis</title>
     <style>
@@ -75,7 +77,7 @@
       .background {
         position: fixed;
         inset: 0;
-        background: url("../work/photography/53337560396_67699543ce_h.jpg") center center / cover no-repeat;
+        background: url("work/photography/53337560396_67699543ce_h.jpg") center center / cover no-repeat;
         z-index: -2;
       }
 

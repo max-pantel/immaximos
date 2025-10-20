@@ -1,11 +1,13 @@
 ---
 // src/pages/contact.astro
+const BASE = '/immaximos/'; // must match astro.config.mjs base
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact - maximos 'halbert' pantelidakis</title>
     <style>
@@ -151,9 +153,9 @@
         ></iframe>
 
       <p class="email">pantel.maxim@gmail.com</p>
-      
+
       <video autoplay loop muted playsinline preload="metadata">
-        <source src="./contact/eisenstein.mp4" type="video/mp4" />
+        <source src="contact/eisenstein.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

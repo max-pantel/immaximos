@@ -1,11 +1,16 @@
 ---
 // src/pages/work/music-videos.astro
+const BASE = '/immaximos/'; // must match astro.config.mjs base
+
 ---
+
+
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Music Videos - maximos 'halbert' pantelidakis</title>
     <style>
@@ -325,8 +330,8 @@
     <!-- Full-width grid (no container) -->
     <section class="video-grid">
       <!-- Example Video 1 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="KIzi_IFm-PE" data-hover-video="../thumbnails/music-videos/floor-loop.mp4">
-        <img src="../thumbnails/music-videos/floor-thumb.jpg" alt="The Floor by Bipolia">
+      <div class="video-item" data-video-type="youtube" data-video-id="KIzi_IFm-PE" data-hover-video="thumbnails/music-videos/floor-loop.mp4">
+        <img src="thumbnails/music-videos/floor-thumb.jpg" alt="The Floor by Bipolia">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -341,8 +346,8 @@
       </div>
       
       <!-- Example Video 2 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="yfj1plOFzIk" data-hover-video="../thumbnails/music-videos/newjersey-loop.mp4">
-        <img src="../thumbnails/music-videos/newjersey-thumb.jpg" alt="Ο δολοφόνος του Νιου Τζέρσεϋ">
+      <div class="video-item" data-video-type="youtube" data-video-id="yfj1plOFzIk" data-hover-video="thumbnails/music-videos/newjersey-loop.mp4">
+        <img src="thumbnails/music-videos/newjersey-thumb.jpg" alt="Ο δολοφόνος του Νιου Τζέρσεϋ">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -357,8 +362,8 @@
       </div>
       
       <!-- Example Video 3 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="GCXxL3V0-BI" data-hover-video="../thumbnails/music-videos/colin-stetson-loop.mp4">
-        <img src="../thumbnails/music-videos/colin-stetson-thumb.jpg" alt="And Still They Move">
+      <div class="video-item" data-video-type="youtube" data-video-id="GCXxL3V0-BI" data-hover-video="thumbnails/music-videos/colin-stetson-loop.mp4">
+        <img src="thumbnails/music-videos/colin-stetson-thumb.jpg" alt="And Still They Move">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -373,8 +378,8 @@
       </div>
       
       <!-- Example Video 4 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="60-IoeFrABU" data-hover-video="../thumbnails/music-videos/guerilla-music-loop.mp4">
-        <img src="../thumbnails/music-videos/guerilla-music-thumb.jpg" alt="Guerilla Music">
+      <div class="video-item" data-video-type="youtube" data-video-id="60-IoeFrABU" data-hover-video="thumbnails/music-videos/guerilla-music-loop.mp4">
+        <img src="thumbnails/music-videos/guerilla-music-thumb.jpg" alt="Guerilla Music">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -394,8 +399,8 @@
       </div>
       
       <!-- Example Video 5 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="ORcYM6MOsA4" data-hover-video="../thumbnails/music-videos/misery-loop.mp4">
-        <img src="../thumbnails/music-videos/misery-thumb.jpg" alt="Misery">
+      <div class="video-item" data-video-type="youtube" data-video-id="ORcYM6MOsA4" data-hover-video="thumbnails/music-videos/misery-loop.mp4">
+        <img src="thumbnails/music-videos/misery-thumb.jpg" alt="Misery">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -410,8 +415,8 @@
       </div>
       
       <!-- Example Video 6 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="iY4jvbUD6UU" data-hover-video="../thumbnails/music-videos/oh-my-loop.mp4">
-        <img src="../thumbnails/music-videos/oh-my-thumb.jpg" alt="Oh My">
+      <div class="video-item" data-video-type="youtube" data-video-id="iY4jvbUD6UU" data-hover-video="thumbnails/music-videos/oh-my-loop.mp4">
+        <img src="thumbnails/music-videos/oh-my-thumb.jpg" alt="Oh My">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -426,8 +431,8 @@
       </div>
       
       <!-- Example Video 7 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="SiVmseG-gmw" data-hover-video="../thumbnails/music-videos/to-sfalma-loop.mp4">
-        <img src="../thumbnails/music-videos/to-sfalma-thumb.jpg" alt="Kaneis Den Dinei Mia">
+      <div class="video-item" data-video-type="youtube" data-video-id="SiVmseG-gmw" data-hover-video="thumbnails/music-videos/to-sfalma-loop.mp4">
+        <img src="thumbnails/music-videos/to-sfalma-thumb.jpg" alt="Kaneis Den Dinei Mia">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -442,8 +447,8 @@
       </div>
       
       <!-- Example Video 8 -->
-      <div class="video-item" data-video-type="youtube" data-video-id="Jq9NBaK8mzg" data-hover-video="../thumbnails/music-videos/vdeligma-loop.mp4">
-        <img src="../thumbnails/music-videos/vdeligma-thumb.jpg" alt="Gama Mou Tin Kardia">
+      <div class="video-item" data-video-type="youtube" data-video-id="Jq9NBaK8mzg" data-hover-video="thumbnails/music-videos/vdeligma-loop.mp4">
+        <img src="thumbnails/music-videos/vdeligma-thumb.jpg" alt="Gama Mou Tin Kardia">
         <video muted loop playsinline preload="none"></video>
         <div class="play-overlay">
           <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">

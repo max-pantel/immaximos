@@ -1,12 +1,13 @@
 ---
 // src/pages/work/photography.astro
-const base = Astro.base;
+const BASE = '/immaximos/'; // must match astro.config.mjs base
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Photography - maximos 'halbert' pantelidakis</title>
     <style>
@@ -441,7 +442,7 @@ const base = Astro.base;
       
       // Build image path from local files
       function getImagePath(photo) {
-        return `../work/photography/${photo.filename}`;
+        return `work/photography/${photo.filename}`;
       }
       
       // Render photos in grid

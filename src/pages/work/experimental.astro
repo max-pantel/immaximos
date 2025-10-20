@@ -1,11 +1,13 @@
 ---
 // src/pages/work/experimental.astro
+const BASE = '/immaximos/'; // must match astro.config.mjs base
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Experimental - maximos 'halbert' pantelidakis</title>
     <style>
@@ -312,7 +314,7 @@
       };
       
       function getMediaPath(filename) {
-        return `../work/experimental/${filename}`;
+        return `work/experimental/${filename}`;
       }
       
       function createWorkItem(work, category) {
