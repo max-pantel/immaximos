@@ -1,0 +1,315 @@
+---
+// src/pages/work/experimental-old.astro
+const BASE = '/'; // must match astro.config.mjs base
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={BASE} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experimental - maximos 'halbert' pantelidakis</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+      background: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 100%;
+      padding: 0 5vw;
+    }
+    
+    /* Header */
+    header {
+      padding: 40px 0;
+      border-bottom: 1px solid #333;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .back-link {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    
+    .back-link:hover {
+      color: #fff;
+    }
+    
+    .logo {
+      font-size: 18px;
+      font-weight: 400;
+      text-decoration: none;
+      color: #fff;
+    }
+    
+    /* Page Title */
+    .page-header {
+      padding: 60px 0 40px 0;
+      text-align: center;
+    }
+    
+    .page-header h1 {
+      font-size: clamp(24px, 4vw, 48px);
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+    
+    .page-header p {
+      font-size: clamp(14px, 2vw, 18px);
+      color: #999;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Section Headers */
+    .section-header {
+      margin: 60px 0 30px 0;
+      text-align: center;
+    }
+    
+    .section-header h2 {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 300;
+      color: #fff;
+    }
+    
+    /* Grid - fully responsive */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(16px, 2vw, 32px);
+      width: 100%;
+      padding: 0 5vw;
+      margin-bottom: 60px;
+    }
+
+    /* Grid items */
+    .work-item {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%; /* default square */
+      position: relative;
+      background: #111;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .work-item.video-widescreen {
+      padding-bottom: 56.25%; /* 16:9 */
+    }
+
+    /* All media fills container */
+    .work-item > *,
+    .work-item img,
+    .work-item video,
+    .work-item iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border: none;
+    }
+
+    .work-item:hover img,
+    .work-item:hover video {
+      filter: brightness(1.1);
+      transition: filter 0.3s ease;
+    }
+
+    .work-item[data-clickable] {
+      cursor: pointer;
+    }
+
+    .work-item[data-clickable]:hover {
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+    
+    footer {
+      border-top: 1px solid #333;
+      padding: 40px 0;
+      text-align: center;
+      color: #666;
+    }
+    
+    /* Tablet */
+    @media (min-width: 768px) {
+      .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Desktop */
+    @media (min-width: 1200px) {
+      .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      .work-grid {
+        padding: 0 20px;
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header {
+        padding: 40px 0 30px 0;
+      }
+      
+      .section-header {
+        margin: 40px 0 20px 0;
+      }
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/" class="back-link">← Back to Home</a>
+          <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
+        </div>
+      </header>
+      
+      <section class="page-header">
+        <h1>Experimental (UNDER CONSTRUCTION)</h1>
+        <p>Works inspired by surrealist automatism and DADA. Collage, stop-motion and digital animations. More work will be added here if I ever manage to find my files.</p>
+      </section>
+      
+      <section class="section-header">
+        <h2>Commission Work</h2>
+      </section>
+    </div>
+    
+    <div class="work-grid" id="commissionGrid"></div>
+    
+    <div class="container">
+      <section class="section-header">
+        <h2>Personal Projects</h2>
+      </section>
+    </div>
+    
+    <div class="work-grid" id="personalGrid">
+      <div class="work-item video-widescreen">
+        <iframe src="https://player.vimeo.com/video/730570976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+          allow="autoplay; fullscreen; picture-in-picture"
+          title="Language is non-verbal"></iframe>
+      </div>
+    
+      <div class="work-item">
+        <iframe src="https://player.vimeo.com/video/707499084?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" 
+          allow="autoplay; fullscreen; picture-in-picture" 
+          title="Dive into thought"></iframe>
+      </div>
+    
+      <div class="work-item video-widescreen">
+        <iframe src="https://player.vimeo.com/video/707497836?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+          allow="autoplay; fullscreen; picture-in-picture"
+          title="Rabbit Hole"></iframe>
+      </div>
+    </div>
+    
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    
+    <div class="container">
+      <footer>
+        <p>&copy; 2025 Maximos Pantelidakis. All rights reserved.</p>
+      </footer>
+    </div>
+    
+    <script>
+      const works = {
+        commission: [
+          { type: 'video', filename: 'lord-of-flies.mp4', link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M', title: 'Lord of Flies', aspectClass: 'video-widescreen' },
+          { type: 'video', filename: 'par-tex.mp4', link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M', title: 'Par-Tex', aspectClass: 'video-widescreen' },
+          { type: 'image', filename: 'redflag.jpg', link: 'https://dribbble.com/shots/25009811-Collage-Album-cover-for-an-upcoming-single', title: 'Red Flag', aspectClass: 'image-square' },
+          { type: 'video', filename: 'descartes.mp4', link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M', title: 'Descartes', aspectClass: 'video-widescreen' }
+        ],
+        personal: [
+          { type: 'image', filename: 'child-dreaming.jpg', title: 'Child Dreaming', aspectClass: 'image-square' },
+          { type: 'image', filename: 'recalling.jpg', title: 'Recalling', aspectClass: 'image-square' },
+          { type: 'image', filename: 'suffer.jpg', title: 'Suffer', aspectClass: 'image-square' }
+        ]
+      };
+      
+      function getMediaPath(filename) {
+        return `work/experimental/${filename}`;
+      }
+      
+      function createWorkItem(work) {
+        const item = document.createElement('div');
+        item.className = `work-item ${work.aspectClass || ''}`;
+        
+        if (work.link) {
+          item.setAttribute('data-clickable', 'true');
+          item.addEventListener('click', () => window.open(work.link, '_blank'));
+        }
+        
+        if (work.type === 'video') {
+          const video = document.createElement('video');
+          video.src = getMediaPath(work.filename);
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          
+          item.addEventListener('mouseenter', () => video.play().catch(e => console.log('Play error:', e)));
+          item.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+          });
+          
+          item.appendChild(video);
+        } else {
+          const img = document.createElement('img');
+          img.src = getMediaPath(work.filename);
+          img.alt = work.title;
+          item.appendChild(img);
+        }
+        
+        return item;
+      }
+      
+      function renderWorks() {
+        const commissionGrid = document.getElementById('commissionGrid');
+        const personalGrid = document.getElementById('personalGrid');
+        
+        works.commission.forEach(work => commissionGrid.appendChild(createWorkItem(work)));
+        works.personal.forEach(work => personalGrid.appendChild(createWorkItem(work)));
+      }
+      
+      renderWorks();
+    </script>
+  </body>
+</html>

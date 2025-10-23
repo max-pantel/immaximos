@@ -312,7 +312,8 @@ const BASE = '/'; // must match astro.config.mjs base
       </header>
       
       <section class="page-header">
-        <h1>Photography (UNDER CONSTRUCTION)</h1>
+        <h1>Photography</h1>
+        <p>(page under constructon)</p>
         <p>Urbex and street photography</p>
       </section>
     </div>
@@ -444,20 +445,28 @@ const BASE = '/'; // must match astro.config.mjs base
       function getImagePath(photo) {
         return `work/photography/${photo.filename}`;
       }
-      
       // Render photos in grid
       function renderPhotos() {
         const grid = document.getElementById('photoGrid');
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = 'repeat(7, 1fr)'; // 7 columns
+        grid.style.gridTemplateRows = 'repeat(2, 1fr)'; // 2 rows
+        grid.style.gap = '10px'; // Optional: space between cells
         
         photos.forEach((photo, index) => {
           const item = document.createElement('div');
           item.className = 'photo-item';
           item.dataset.index = index;
-          
+          item.style.overflow = 'hidden'; // Ensure photos don't extend beyond the cell
+          item.style.position = 'relative'; // For positioning the image
+
           const img = document.createElement('img');
           img.src = getImagePath(photo);
           img.alt = photo.title;
-          
+          img.style.width = '100%'; // Make image fill the cell
+          img.style.height = '100%'; // Make image fill the cell
+          img.style.objectFit = 'cover'; // Cover the cell without stretching
+
           item.appendChild(img);
           item.addEventListener('click', () => openLightbox(index));
           grid.appendChild(item);

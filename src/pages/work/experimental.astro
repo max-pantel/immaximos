@@ -3,400 +3,539 @@
 const BASE = '/'; // must match astro.config.mjs base
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <base href={BASE} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Experimental - maximos 'halbert' pantelidakis</title>
-    <style>
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <base href={`${BASE}`} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experimental - maximos 'halbert' pantelidakis</title>
+  <style>
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-        background: #0a0a0a;
-        color: #fff;
-        line-height: 1.6;
-      }
-      
+    body {
+      font-family: 'PF Videotext Regular', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+      background: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Header */
+    header {
+      padding: 40px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 400;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    /* Page Title */
+    .page-header {
+      padding: 60px 0 40px 0;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: #999;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Toggle Buttons */
+    .toggle-button {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin: 30px 0;
+    }
+
+    .toggle-button button {
+      background: #1a1a1a;
+      color: #999;
+      border: 1px solid #333;
+      padding: 12px 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .toggle-button button:first-child {
+      border-right: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .toggle-button button:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .toggle-button button:hover {
+      color: #fff;
+      background: #222;
+    }
+
+    .toggle-button button.active {
+      background: #333;
+      color: #fff;
+    }
+
+    .video-container {
+      position: relative;
+      overflow: hidden;
+    }
+    #personal-projects .video-container {
+      margin-bottom: 2px; /* adds small spacing under the Greece video */
+    }
+
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+
+    .video-container .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      pointer-events: none;
+    }
+
+    .video-container:hover .overlay {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .video-container .overlay h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 6px rgba(0,0,0,0.7);
+    }
+
+    .video-container .overlay p {
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 70%;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    .play-button {
+      position: absolute;
+      border: 1px solid #fff;
+      background: transparent;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .play-button {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .play-button::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 13px;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid #fff;
+    }
+    .play-button.playing::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      width: 6px;
+      height: 18px;
+      border-left: 6px solid #fff;
+      border-right: 6px solid #fff;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .mute-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 20px; 
+      /* Make the text bold */
+
+      color: #fff;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      pointer-events: auto; /* make sure it can be clicked */
+      transition: color 0.3s;
+    }
+
+    .mute-button:hover {
+      color: #ddd; /* subtle highlight on hover */
+    }
+
+    .play-button:hover{
+      border-color: #fff;
+      background: rgba(255,255,255,0.15);
+    }
+
+
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 90%;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .grid-item {
+      background: #1a1a1a;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #333;
+      font-size: 24px;
+      color: #666;
+    }
+    .grid-item.widescreen {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border: 1 px solid #333;
+    }
+
+    .grid-item.widescreen iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #commissions .center-item {
+      grid-column: 1 / -1; /* span both columns */
+      display: flex;
+      justify-content: center; /* center horizontally */
+      align-items: center;     /* center vertically if needed */
+    }
+
+    #commissions .center-item img {
+      width: 50%;     /* smaller size */
+      height: auto;   /* keep aspect ratio */
+      display: block; /* ensure proper centering */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      border-top: 1px solid #333;
+      padding: 40px 0;
+      text-align: center;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
       .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 40px;
+        padding: 0 20px;
       }
-      
-      /* Header */
-      header {
-        padding: 40px 0;
-        border-bottom: 1px solid #333;
+
+      .grid {
+        grid-template-columns: 1fr;
       }
-      
-      .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      
-      .back-link {
-        color: #ccc;
-        text-decoration: none;
-        font-size: 16px;
-        transition: color 0.3s;
-      }
-      
-      .back-link:hover {
-        color: #fff;
-      }
-      
-      .logo {
-        font-size: 18px;
-        font-weight: 400;
-        text-decoration: none;
-        color: #fff;
-      }
-      
-      /* Page Title */
+
       .page-header {
-        padding: 60px 0 40px 0;
-        text-align: center;
+        padding: 40px 0 30px 0;
       }
-      
+
       .page-header h1 {
-        font-size: clamp(32px, 5vw, 48px);
-        font-weight: 300;
-        margin-bottom: 15px;
+        font-size: 32px;
       }
-      
+
       .page-header p {
-        font-size: 18px;
-        color: #999;
-        max-width: 900px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
-      
-      /* Section Headers */
-      .section-header {
-        margin: 80px 0 30px 0;
-        text-align: center;
-      }
-      
-      .section-header h2 {
-        font-size: 28px;
-        font-weight: 300;
-        color: #fff;
-        margin-bottom: 10px;
-      }
-      
-      /* Main grid container styling */
-      .work-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px; /* increased slightly to make separation visible */
-          margin: 0 auto 80px auto;
-          max-width: 75%; /* adjusted from 50% */
-          justify-content: center;
-        }
-
-        .work-item {
-          position: relative;
-          overflow: hidden;
-          display: block;
-          background: #111;
-          cursor: pointer;
-          width: 100%;
-          padding: 2px; /* added minimal padding */
-          box-sizing: border-box;
-        }
-      
-      /* Different aspect ratios based on content */
-      .work-item.video-widescreen {
-        aspect-ratio: 16/9;
-      }
-      
-      .work-item.image-square {
-        aspect-ratio: 1/1;
-      }
-      .work-item img,
-      .work-item video,
-      .work-item iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: calc(100% - 4px);
-        height: calc(100% - 4px);
-        object-fit: contain;
-        background: #111;
-        transition: filter 0.3s ease, transform 0.3s ease;
+        font-size: 16px;
       }
 
-      .work-item:hover img,
-      .work-item:hover video {
-        filter: brightness(1.1);
-        transform: scale(1.02);
+      .toggle-button button {
+        padding: 10px 20px;
+        font-size: 14px;
       }
-      
-      footer {
-        border-top: 1px solid #333;
-        padding: 40px 0;
-        text-align: center;
-        color: #666;
-      }
-      
-      @media (max-width: 1200px) {
-        .work-grid {
-          max-width: 85%;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .work-grid {
-          grid-template-columns: 1fr;
-          max-width: 100%;
-        }
-        
-        .page-header {
-          padding: 40px 0 30px 0;
-        }
-        
-        .page-header h1 {
-          font-size: 32px;
-        }
-        
-        .page-header p {
-          font-size: 16px;
-        }
-        
-        .section-header {
-          margin: 60px 0 20px 0;
-        }
-        
-        .section-header h2 {
-          font-size: 24px;
-        }
-      }
-      
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <div class="header-content">
-          <a href="/" class="back-link">← Back to Home</a>
-          <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
-        </div>
-      </header>
-      
-      <section class="page-header">
-        <h1>Experimental (UNDER CONSTRUCTION)</h1>
-        <p>Works inspired by surrealist automatism and DADA. Collage, stop-motion and digital animations. More work will be added here if I ever manage to find my files.</p>
-      </section>
-      
-      <!-- Commission Work Section -->
-      <section class="section-header">
-        <h2>Commission Work</h2>
-      </section>
-    </div>
-    
-    <!-- Grid outside container for proper centering -->
-    <div class="work-grid" id="commissionGrid">
-      <!-- Commission items will be added here by JavaScript -->
-    </div>
-    
-    <div class="container">
-      <!-- Personal Projects Section -->
-      <section class="section-header">
-        <h2>Personal Projects</h2>
-      </section>
-    </div>
-    
-    <div class="work-grid" id="personalGrid">
-      <div class="work-item video-widescreen">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/730570976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Language is non-verbal"></iframe>
-        </div>
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <a href="/" class="back-link">← Back to Home</a>
+        <a href="/" class="logo">maximos 'halbert' pantelidakis</a>
       </div>
-    
-      <div class="work-item video-square">
-        <div style="padding:100% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/707499084?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" 
-          width="500" 
-          height="500" frameborder="0" 
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" 
-          title="Dive into thought"></iframe>
-        </div>
+    </header>
+
+    <section class="page-header">
+      <h1>Experimental</h1>
+      <p>(page under constructon)</p>
+      <p>  </p>
+      <p>Works inspired by surrealist automatism and DADA. Collage, stop-motion and digital animations. More work will be added here if I ever manage to find my files.</p>
+      <div class="toggle-button">
+        <button id="btn-personal" class="active" onclick="showCategory('personal')">Personal</button>
+        <button id="btn-commission" onclick="showCategory('commission')">Commission</button>
       </div>
-    
-      <div class="work-item video-widescreen">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-          <iframe src="https://player.vimeo.com/video/707497836?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Rabbit Hole"></iframe>
+    </section>
+  </div>
+  
+  <div class="grid" id="personal-projects">
+
+    <div class="grid-item widescreen video-container">
+      <video id="greeceVideo" autoplay loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+        <source src="/work/experimental/greece.mp4" type="video/mp4">
+      </video>
+        <!-- Overlay -->
+      <div class="overlay">
+        <div class="text">
+          <h2>Living under the two e's of Greece</h2>
+          <p>«Ζῶντας κάτω ἀπό τά δύο λάμδα τῆς Ἑλλάδας»<br>
+          A short animation that, hopefully, will develop into a short film.<br><br>
+          Archive footage, music by Kyriakos Sfetsas and Manos Hadjidakis, a sound recording of my grandmother,
+          an excerpt from an interview of Nobel-prize winner Odyseas Elytis and many Creative Commons photos,
+          all shot in Greece.<br><br>
+          What is this thing we call Greece? How to encapsulate this irregular amalgam into a work of art?<br><br>
+          In the context of some kind of #semiotics of art, let's assume that the various artistic movements
+          with their characteristic techniques reflect, in a way, the psyche of an era, a culture, the creator or
+          the very fetishized object, that the individual art pieces belonging to that style are trying to portray.<br><br>
+          Then, it seems to me that only the style of collage, especially the dadaistic one, i.e. the automatic creation,
+          is capable of taming the waves of this country's rugged relief; of daring to soar its seas.<br><br>
+          Ancient monuments or modern suffocating urban sprawl? Balkans or Europe? West or East? Subaltern or hegemonist?
+          </p>
         </div>
+        <button class="play-button" id="playBtn" aria-label="Play/Pause"></button>
+        <button class="mute-button" id="muteBtn" aria-label="Mute/Unmute"></button>
       </div>
     </div>
-    <script src="https://player.vimeo.com/api/player.js"></script>
+    <div class="grid-item widescreen">
+      <iframe
+      src="https://player.vimeo.com/video/730570976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      title="Language is non-verbal"> 
+    </iframe>
+    </div>
+    <div class="grid-item"><img src="/work/experimental/child-dreaming.jpg" 
+      alt="Child Dreaming" 
+      style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+    <div class="grid-item"><img src="/work/experimental/recalling.jpg" 
+      alt="Recalling" 
+      style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+    <div class="grid-item"><img src="/work/experimental/suffer.jpg" 
+      alt="May the God of Time Have Mercy on Your Soul" 
+      style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+    <div class="grid-item">
+      <iframe src="https://player.vimeo.com/video/707499084?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+      width="1416" height="1416" 
+      frameborder="0" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      style="width: 100%; height: 100%; object-fit: cover;"
+      title="Dive into thought"></iframe>
+      </div>
+    <div class="grid-item widescreen">
+      <iframe src="https://player.vimeo.com/video/707497836?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;loop=1" 
+      frameborder="0" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin"  
+      title="Rabbit Hole">
+      </iframe>
+    </div>
+    <div class="grid-item">
+      <a href="https://www.deviantart.com/maximpantel/art/Atlas-972234938" target="_blank" rel="noopener noreferrer">
+      <img 
+      src="/work/experimental/atlas.jpg"
+      alt="Atlas"
+      style="width: 100%; height: 100%; object-fit: cover;">
+      </a>
+    </div>
+    <div class="grid-item">
+      <iframe src="https://player.vimeo.com/video/649043044?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;loop=1" 
+      frameborder="0" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      style="width: 100%; height: 100%; object-fit: cover;"
+      title="Wreyeting">
+      </iframe>
+    </div>
+    <div class="grid-item widescreen">
+      <iframe src="https://player.vimeo.com/video/649031461?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;loop=1" 
+      frameborder="0" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin"
+      title="Breaking"></iframe>  
+    </div>
+  </div>
+  <div class="grid hidden" id="commissions">
+    
+    <div class="grid-item center-item">
+      <a href="https://dribbble.com/shots/25009811-Collage-Album-cover-for-an-upcoming-single"
+        target="_blank" rel="noopener noreferrer">
+        <img
+          src="/work/experimental/redflag.jpg"
+          alt="Red Flag"
+          style="width: 100%; height: 100%; object-fit: cover;">
+      </a>
+    </div>
+    <div class="grid-item widescreen">
+      <a href="https://www.youtube.com/watch?v=qBV6wImPJ5M" target="_blank" rel="noopener noreferrer">
+        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="/work/experimental/lord-of-flies.mp4" type="video/mp4">
+        </video>
+      </a>
+    </div>
+    <div class="grid-item widescreen">
+      <a href="https://www.youtube.com/watch?v=qBV6wImPJ5M" target="_blank" rel="noopener noreferrer">
+        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="/work/experimental/par-tex.mp4" type="video/mp4">
+        </video>
+      </a>
+    </div>
+    <div class="grid-item widescreen">
+      <a href="https://www.youtube.com/watch?v=qBV6wImPJ5M" target="_blank" rel="noopener noreferrer">
+        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="/work/experimental/descartes.mp4" type="video/mp4">
+        </video>
+      </a>
+    </div>
+  </div>
 
-    
-    <div class="container">
-    
+  <div class="container">
     <footer>
-      <div class="container">
-        <p>&copy; 2025 Maximos Pantelidakis. All rights reserved.</p>
-      </div>
+      <p>&copy; 2025 Maximos Pantelidakis. All rights reserved.</p>
     </footer>
-    
-    <script>
-      // Work data with dimensions
-      const works = {
-        commission: [
-          {
-            type: 'video',
-            filename: 'lord-of-flies.mp4',
-            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
-            title: 'Lord of Flies',
-            aspectClass: 'video-widescreen'
-          },
-          {
-            type: 'video',
-            filename: 'par-tex.mp4',
-            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
-            title: 'Par-Tex',
-            aspectClass: 'video-widescreen'
-          },
-          {
-            type: 'image',
-            filename: 'redflag.jpg',
-            link: 'https://dribbble.com/shots/25009811-Collage-Album-cover-for-an-upcoming-single',
-            title: 'Red Flag',
-            aspectClass: 'image-square'
-          },
-          {
-            type: 'video',
-            filename: 'descartes.mp4',
-            link: 'https://www.youtube.com/watch?v=qBV6wImPJ5M',
-            title: 'Descartes',
-            aspectClass: 'video-widescreen'
-          }
-        ],
-        personal: [
-          {
-            type: 'image',
-            filename: 'child-dreaming.jpg',
-            title: 'Child Dreaming',
-            aspectClass: 'image-square'
-          },
-          {
-            type: 'image',
-            filename: 'recalling.jpg',
-            title: 'Recalling',
-            aspectClass: 'image-square'
-          },
-          {
-            type: 'image',
-            filename: 'suffer.jpg',
-            title: 'Suffer',
-            aspectClass: 'image-square'
-          }
-        ]
-      };
-      
-      function getMediaPath(filename) {
-        return `work/experimental/${filename}`;
+  </div>
+
+  <script is:inline>
+    function showCategory(category) {
+      const personal = document.getElementById('personal-projects');
+      const commissions = document.getElementById('commissions');
+      const btnPersonal = document.getElementById('btn-personal');
+      const btnCommission = document.getElementById('btn-commission');
+
+      if (category === 'personal') {
+        personal.classList.remove('hidden');
+        commissions.classList.add('hidden');
+        btnPersonal.classList.add('active');
+        btnCommission.classList.remove('active');
+      } else {
+        personal.classList.add('hidden');
+        commissions.classList.remove('hidden');
+        btnPersonal.classList.remove('active');
+        btnCommission.classList.add('active');
       }
-      
-      function createWorkItem(work, category) {
-        const item = document.createElement('div');
-        item.className = `work-item ${work.aspectClass}`;
-        
-        if (work.type === 'video') {
-          const video = document.createElement('video');
-          video.src = getMediaPath(work.filename);
-          video.muted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.setAttribute('playsinline', '');
-          video.setAttribute('webkit-playsinline', '');
-          
-          // Force load
-          video.load();
-          
-          // Play on hover
-          item.addEventListener('mouseenter', () => {
-            video.play().catch(e => console.log('Video play error:', e));
-          });
-          
-          item.addEventListener('mouseleave', () => {
-            video.pause();
-            video.currentTime = 0;
-          });
-          
-          // Debug: log when video can play
-          video.addEventListener('canplay', () => {
-            console.log('Video ready:', work.filename);
-          });
-          
-          video.addEventListener('error', (e) => {
-            console.error('Video load error:', work.filename, e);
-          });
-          
-          item.appendChild(video);
-        } else {
-          const img = document.createElement('img');
-          img.src = getMediaPath(work.filename);
-          img.alt = work.title;
-          
-          img.addEventListener('error', (e) => {
-            console.error('Image load error:', work.filename, e);
-          });
-          
-          item.appendChild(img);
-        }
-        
-        // Add click handler for commission work
-        if (work.link) {
-          item.style.cursor = 'pointer';
-          item.addEventListener('click', () => {
-            window.open(work.link, '_blank');
-          });
-        } else {
-          item.style.cursor = 'default';
-        }
-        
-        return item;
+    }
+  </script>
+
+  <script is:inline>
+    const video = document.getElementById('greeceVideo');
+    const playBtn = document.getElementById('playBtn');
+    const muteBtn = document.getElementById('muteBtn');
+
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
       }
-      
-      function renderWorks() {
-        const commissionGrid = document.getElementById('commissionGrid');
-        const personalGrid = document.getElementById('personalGrid');
-        
-        // Render commission work
-        works.commission.forEach(work => {
-          const item = createWorkItem(work, 'commission');
-          commissionGrid.appendChild(item);
-        });
-        
-        // Render personal projects
-        works.personal.forEach(work => {
-          const item = createWorkItem(work, 'personal');
-          personalGrid.appendChild(item);
-        });
+    });
+
+    const updateMuteButtonText = () => {
+      muteBtn.textContent = video.muted ? 'Unmute' : 'Mute';
+    }
+
+    // Initialize text on page load
+    updateMuteButtonText();
+
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      updateMuteButtonText();
+    });
+
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
       }
-      
-      // Initialize
-      renderWorks();
-    </script>
-  </body>
+    });
+    video.addEventListener('play', () => playBtn.classList.add('playing'));
+    video.addEventListener('pause', () => playBtn.classList.remove('playing'));
+
+  </script>
+
+</body>
 </html>
