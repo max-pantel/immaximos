@@ -166,21 +166,21 @@ const BASE = '/'; // must match astro.config.mjs base
         }
       }
       
-      /* Work section - CHANGES: grid forced to full-width 2x2, video thumbnails enabled */
+      /* Work section */
       .work-section {
         background: #0a0a0a;
         min-height: 100vh;
         padding-top: 80px;
       }
       
-      /* full-bleed grid: removes container constraint and spans viewport */
+      /* Full-bleed grid */
       .work-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
         gap: 0;
         margin: 0 0 80px 0;
-        width: 100vw; /* full viewport width */
+        width: 100vw;
         max-width: 100vw;
       }
 
@@ -191,10 +191,10 @@ const BASE = '/'; // must match astro.config.mjs base
         background: #111;
         text-decoration: none;
         color: inherit;
-        height: 100%; /* fill grid cell */
+        height: 100%;
+        min-height: 50vh;
       }
 
-      /* support both static images and looping video thumbnails */
       .work-item img,
       .work-item video {
         width: 100%;
@@ -248,7 +248,6 @@ const BASE = '/'; // must match astro.config.mjs base
         backdrop-filter: blur(10px);
       }
 
-      /* remove play-overlay usage for category tiles */
       .play-overlay { display: none; }
 
       footer {
@@ -277,48 +276,6 @@ const BASE = '/'; // must match astro.config.mjs base
       
       .mute-indicator.show {
         opacity: 1;
-      }
-      
-      @media (max-width: 768px) {
-        nav {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-        }
-        
-        nav ul {
-          gap: 20px;
-        }
-        
-        .hero-header {
-          top: 20px;
-          left: 20px;
-        }
-        
-        .hero-description {
-          bottom: 60px;
-          left: 20px;
-          right: 20px;
-        }
-        
-        .hero-description p {
-          font-size: 14px;
-        }
-        
-        /* stack grid on narrow screens */
-        .work-grid {
-          grid-template-columns: 1fr;
-          grid-template-rows: none;
-          width: 100%;
-        }
-
-        .work-item {
-          aspect-ratio: 16/9;
-        }
-        
-        .work-section {
-          padding-top: 40px;
-        }
       }
       
       /* Lightbox Modal */
@@ -387,6 +344,204 @@ const BASE = '/'; // must match astro.config.mjs base
       html {
         scroll-behavior: smooth;
       }
+      
+      /* ============================================
+         MOBILE RESPONSIVE STYLES
+         ============================================ */
+      
+      /* Tablets and smaller */
+      @media (max-width: 1024px) {
+        .work-item h3 {
+          font-size: 16px;
+        }
+        
+        .work-item p {
+          font-size: 13px;
+        }
+      }
+      
+      /* Mobile devices */
+      @media (max-width: 768px) {
+        /* Navigation - make touch-friendly */
+        nav {
+          top: 15px;
+          right: 15px;
+        }
+        
+        nav ul {
+          gap: 15px;
+        }
+        
+        nav a {
+          font-size: 14px;
+          padding: 5px;
+        }
+        
+        /* Hero header */
+        .hero-header {
+          top: 15px;
+          left: 15px;
+          max-width: calc(100% - 200px);
+        }
+        
+        .logo {
+          font-size: 11pt;
+        }
+        
+        .subtitle {
+          font-size: 9pt;
+        }
+        
+        /* Hero description */
+        .hero-description {
+          bottom: 70px;
+          left: 15px;
+          right: 15px;
+        }
+        
+        .hero-description p {
+          font-size: 13px;
+          line-height: 1.5;
+        }
+        
+        /* Scroll indicator - smaller on mobile */
+        .scroll-indicator {
+          bottom: 20px;
+          padding: 12px;
+        }
+        
+        .scroll-arrow {
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 10px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Work section */
+        .work-section {
+          padding-top: 40px;
+        }
+        
+        /* Stack grid vertically on mobile */
+        .work-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+          width: 100%;
+        }
+
+        .work-item {
+          min-height: 300px;
+          aspect-ratio: 1/1;
+        }
+        
+        /* Make content always visible on mobile (no hover) */
+        .work-item-content {
+          opacity: 1;
+          background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+          bottom: 0;
+          top: auto;
+          left: 0;
+          right: 0;
+          transform: none;
+          padding: 30px 20px 20px 20px;
+        }
+        
+        .work-item:hover .work-item-content {
+          opacity: 1;
+        }
+        
+        /* Don't scale/darken videos on mobile */
+        .work-item:hover img,
+        .work-item:hover video {
+          filter: none;
+          transform: none;
+        }
+        
+        .work-item h3 {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+        
+        .work-item p {
+          font-size: 12px;
+          line-height: 1.4;
+        }
+        
+        /* Footer */
+        footer {
+          padding: 30px 0;
+          font-size: 14px;
+        }
+        
+        /* Lightbox adjustments */
+        .lightbox-content {
+          width: 95%;
+        }
+        
+        .lightbox-close {
+          top: -40px;
+          font-size: 25px;
+        }
+      }
+      
+      /* Small phones */
+      @media (max-width: 480px) {
+        .hero-header {
+          max-width: calc(100% - 150px);
+        }
+        
+        .logo {
+          font-size: 10pt;
+        }
+        
+        .subtitle {
+          font-size: 8pt;
+        }
+        
+        nav ul {
+          gap: 12px;
+        }
+        
+        nav a {
+          font-size: 12px;
+        }
+        
+        .hero-description {
+          bottom: 60px;
+        }
+        
+        .hero-description p {
+          font-size: 12px;
+        }
+        
+        .work-item {
+          min-height: 250px;
+        }
+        
+        .work-item h3 {
+          font-size: 14px;
+        }
+        
+        .work-item p {
+          font-size: 11px;
+        }
+        
+        .work-item-content {
+          padding: 20px 15px 15px 15px;
+        }
+      }
+      
+      /* Landscape mobile orientation */
+      @media (max-width: 768px) and (orientation: landscape) {
+        .hero-section {
+          height: auto;
+          min-height: 100vh;
+        }
+        
+        .work-item {
+          aspect-ratio: 16/9;
+          min-height: 250px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -432,7 +587,6 @@ const BASE = '/'; // must match astro.config.mjs base
 
     <!-- Work Section -->
     <section class="work-section" id="work">
-      <!-- removed container wrapper so grid can be full-bleed -->
       <div class="work-grid">
       <!-- Category: Music Videos -->
       <a href="work/music-videos" class="work-item">
@@ -447,7 +601,6 @@ const BASE = '/'; // must match astro.config.mjs base
       <a href="work/video-essays" class="work-item">
         <video src="thumbnails/video-essay-thumb.mp4" muted loop playsinline preload="auto"></video>
         <div class="work-item-content">
-        <!-- <span class="category-tag">Video Essay</span> -->
         <h3>Video Essays</h3>
         <p>Big ideas through the lens of pop culture.</p>
         </div>
@@ -466,7 +619,6 @@ const BASE = '/'; // must match astro.config.mjs base
       <a href="work/photography" class="work-item">
         <video src="thumbnails/photos-thumb.mp4" muted loop playsinline preload="auto"></video>
         <div class="work-item-content">
-        <!-- <span class="category-tag">Photography</span> -->
         <h3>Photography [UNDER CONSTRUCTION]</h3>
         <p>Urbex and street photography</p>
         </div>
@@ -505,7 +657,7 @@ const BASE = '/'; // must match astro.config.mjs base
           // Pause and reset video when leaving the entire work-item
           workItem.addEventListener('mouseout', () => {
             videoElement.pause();
-            videoElement.currentTime = 0; // Reset to the start
+            videoElement.currentTime = 0;
           });
         }
       });
@@ -520,9 +672,7 @@ const BASE = '/'; // must match astro.config.mjs base
       const lightboxClose = document.querySelector('.lightbox-close') as HTMLElement | null;
       const lightboxIframe = document.querySelector('.lightbox iframe') as HTMLIFrameElement | null;
 
-      // Ensure video is not null before adding event listeners
       if (video) {
-        // Click video to pause/play
         video.addEventListener('click', () => {
           if (video.paused) {
             video.play();
@@ -531,7 +681,6 @@ const BASE = '/'; // must match astro.config.mjs base
           }
         });
 
-        // M key to mute/unmute
         document.addEventListener('keydown', (e) => {
           if (e.key.toLowerCase() === 'm') {
             e.preventDefault();
@@ -544,16 +693,13 @@ const BASE = '/'; // must match astro.config.mjs base
             }
           }
 
-          // Escape key to close lightbox
           if (e.key === 'Escape') {
             closeLightbox();
           }
         });
       }
 
-      // Ensure scrollIndicator is not null before adding event listener
       if (scrollIndicator) {
-        // Scroll to work section when clicking indicator
         scrollIndicator.addEventListener('click', () => {
           const workSection = document.getElementById('work');
           if (workSection) {
@@ -562,7 +708,6 @@ const BASE = '/'; // must match astro.config.mjs base
         });
       }
 
-      // Show mute indicator
       function showMuteIndicator(text: string) {
         if (muteIndicator) {
           muteIndicator.textContent = text;
@@ -573,20 +718,17 @@ const BASE = '/'; // must match astro.config.mjs base
         }
       }
       
-      // Lightbox functionality: only trigger for items that have data attributes (legacy single-video items)
       document.querySelectorAll('.work-item').forEach((item) => {
         item.addEventListener('click', (e) => {
-          const target = item as HTMLElement; // Assert that item is an HTMLElement
+          const target = item as HTMLElement;
 
-          // if this tile is a category page (no data-video-type), allow normal navigation
           const videoType = target.dataset.videoType;
-          if (!videoType) return; // no prevention, follow the link
+          if (!videoType) return;
 
           e.preventDefault();
           const videoId = target.dataset.videoId;
           const title = target.dataset.title;
 
-          // Ensure lightbox and lightboxIframe are not null
           const lightbox = document.getElementById('lightbox') as HTMLElement | null;
           const lightboxIframe = document.getElementById('lightboxIframe') as HTMLIFrameElement | null;
 
@@ -602,29 +744,25 @@ const BASE = '/'; // must match astro.config.mjs base
             embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
           }
 
-          lightboxIframe.src = embedUrl; // Set the iframe's src
+          lightboxIframe.src = embedUrl;
           lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Prevent scrolling
+          document.body.style.overflow = 'hidden';
         });
       });
       
-      // Close lightbox
       function closeLightbox() {
         if (lightbox && lightboxIframe) {
           lightbox.classList.remove('active');
-          lightboxIframe.src = ''; // Stop video
-          document.body.style.overflow = 'auto'; // Re-enable scrolling
+          lightboxIframe.src = '';
+          document.body.style.overflow = 'auto';
         }
       }
 
-      // Ensure lightboxClose is not null before adding event listener
       if (lightboxClose) {
         lightboxClose.addEventListener('click', closeLightbox);
       }
 
-      // Ensure lightbox is not null before adding event listener
       if (lightbox) {
-        // Close lightbox when clicking outside
         lightbox.addEventListener('click', (e) => {
           if (e.target === lightbox) {
             closeLightbox();
@@ -632,14 +770,13 @@ const BASE = '/'; // must match astro.config.mjs base
         });
       }
 
-      // Update Work navigation link to scroll to work section
       const workNavLink = document.querySelector('nav a[href="#work"]') as HTMLElement | null;
       if (workNavLink) {
         workNavLink.addEventListener('click', (e) => {
           e.preventDefault();
           const workSection = document.getElementById('work');
           if (workSection) {
-            workSection.scrollIntoView({ behavior: 'smooth' });
+            workSection.scrollIntoView({ behavior: smooth });
           }
         });
       }
