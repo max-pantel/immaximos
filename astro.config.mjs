@@ -1,9 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 // https://astro.build/config
 export default defineConfig({
 	site: "https://immaximos.com", 
 	base: "/", 
-	outDir: "./dist"
-	});
+	outDir: "./dist",
+	vite: {
+		server: {
+			host: true,
+			allowedHosts: ['.loca.lt']
+		}
+	}
+});
