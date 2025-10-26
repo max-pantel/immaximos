@@ -879,17 +879,6 @@ const BASE = '/'; // must match astro.config.mjs base
         });
       }
 
-      const workNavLink = document.querySelector('nav a[href="#work"]') as HTMLElement | null;
-      if (workNavLink) {
-        workNavLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          const workSection = document.getElementById('work');
-          if (workSection) {
-            workSection.scrollIntoView({ behavior: smooth });
-          }
-        });
-      }
-
       // === MOBILE NAVIGATION ===
       const menuToggle = document.getElementById('menuToggle');
       const mobileNav = document.getElementById('mobileNav');

@@ -273,6 +273,17 @@ const BASE = '/'; // must match astro.config.mjs base
       height: 100%;
     }
 
+    #commissions.grid {
+      max-width: 80%;
+      margin: 60px auto;
+      justify-items: center;
+      align-items: center;
+    }
+
+    #commissions .grid-item {
+      width: 80%;
+    }
+
     #commissions .center-item {
       grid-column: 1 / -1; /* span both columns */
       display: flex;
@@ -280,12 +291,12 @@ const BASE = '/'; // must match astro.config.mjs base
       align-items: center;     /* center vertically if needed */
     }
 
-    #comissions .widescreen {
+    #commissions .widescreen {
       grid-column: 1 / -1;
       aspect-ratio: 16 / 9;
       position: relative;
       overflow: hidden;
-      border: 1 px solid #333;
+      border: 1px solid #333;
     }
 
     #commissions .center-item img {
@@ -306,30 +317,18 @@ const BASE = '/'; // must match astro.config.mjs base
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
+      .container { padding: 0 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .page-header { padding: 40px 0 30px 0; }
+      .page-header h1 { font-size: 32px; }
+      .page-header p { font-size: 16px; }
+      .toggle-button button { padding: 10px 20px; font-size: 14px; }
+    }
 
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-header {
-        padding: 40px 0 30px 0;
-      }
-
-      .page-header h1 {
-        font-size: 32px;
-      }
-
-      .page-header p {
-        font-size: 16px;
-      }
-
-      .toggle-button button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
+    /* desktop-only tweaks */
+    @media (min-width: 1024px) {
+      #commissions.grid { justify-items: center; }
+      #commissions .grid-item { width: 80%; }
     }
   </style>
 </head>
@@ -460,6 +459,12 @@ const BASE = '/'; // must match astro.config.mjs base
       <video id="how-i-made-redflag" autoplay loop playsinline style="width: 100%; height: 100%; object-fit: contain;">
         <source src="public/work/experimental/car-redflag.mp4" type="video/mp4">
       </video>
+    </div>
+    <div class="grid-item center-item">
+      <img
+      src="/work/experimental/redflag-type.jpg"
+      alt="Red Flag Type"
+      style="width: 100%; height: 100%; object-fit: cover;">
     </div>
   </div>
 

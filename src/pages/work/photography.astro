@@ -203,6 +203,27 @@ const BASE = '/'; // must match astro.config.mjs base
       .lightbox-next {
         right: 30px;
       }
+
+      /* Make it obvious what can be clicked */
+      .photo-item,
+      .photo-item img {
+        cursor: zoom-in; /* show hand on hover over thumbnails */
+      }
+
+      /* Inside the lightbox — indicate interactivity */
+      .lightbox-image {
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+      }
+
+      .lightbox-image:hover {
+        opacity: 0.95; /* subtle cue that clicking will do something */
+      }
+
+      /* When the confirm modal appears, show standard pointer for its buttons */
+      .confirm-btn {
+        cursor: pointer;
+      }
       
       /* Confirmation Modal */
       .confirm-modal {
@@ -456,6 +477,7 @@ const BASE = '/'; // must match astro.config.mjs base
         photos.forEach((photo, index) => {
           const item = document.createElement('div');
           item.className = 'photo-item';
+          item.style.cursor = 'zoom-in';
           item.dataset.index = index;
           item.style.overflow = 'hidden'; // Ensure photos don't extend beyond the cell
           item.style.position = 'relative'; // For positioning the image
