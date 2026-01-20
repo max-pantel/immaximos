@@ -701,7 +701,7 @@ const BASE = '/'; // must match astro.config.mjs base
       <a href="work/music-videos" class="work-item">
         <video src="thumbnails/music-video-thumb.mp4" muted loop playsinline preload="auto"></video>
         <div class="work-item-content">
-        <h3>Music Videos</h3>
+        <h2>Music Videos</h2>
         <p>Multimedia, music videos, fused with dada, collage and video effects.</p>
         </div>
       </a>
@@ -710,25 +710,29 @@ const BASE = '/'; // must match astro.config.mjs base
       <a href="work/video-essays" class="work-item">
         <video src="thumbnails/video-essay-thumb.mp4" muted loop playsinline preload="auto"></video>
         <div class="work-item-content">
-        <h3>Video Essays</h3>
+        <h2>Video Essays</h2>
         <p>Big ideas through the lens of pop culture.</p>
         </div>
       </a>
 
-      <!-- Category: experimental -->
-      <a href="work/experimental" class="work-item">
-        <video src="thumbnails/experimental-thumb.mp4" muted loop playsinline preload="auto"></video>
+      <!-- Category: other-work -->
+      <a href="work/other-work" class="work-item">
+        <img src="thumbnails/other-work-thumb.jpg"
+          alt="Other Work thumbnail"
+          style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" />
         <div class="work-item-content">
-        <h3>Experimental [UNDER CONSTRUCTION]</h3>
-        <p>Animated and non-animated collages, paper cut-outs and experiments.</p>
+        <h2>Other Work</h2>
+        <p>Animations, collages, posters.</p>
         </div>
       </a>
 
       <!-- Category: Photography -->
       <a href="work/photography" class="work-item">
-        <video src="thumbnails/photos-thumb.mp4" muted loop playsinline preload="auto"></video>
+        <img src="thumbnails/photos-thumb.jpg"
+          alt="Photography thumbnail"
+          style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" />
         <div class="work-item-content">
-        <h3>Photography [UNDER CONSTRUCTION]</h3>
+        <h2>Photography</h2>
         <p>Urbex and street photography</p>
         </div>
       </a>
@@ -791,7 +795,7 @@ const BASE = '/'; // must match astro.config.mjs base
         });
 
         document.addEventListener('keydown', (e) => {
-          if (e.key.toLowerCase() === 'm') {
+          if (e.code === 'KeyM') {
             e.preventDefault();
             if (video.muted) {
               video.muted = false;
@@ -806,7 +810,6 @@ const BASE = '/'; // must match astro.config.mjs base
             closeLightbox();
           }
         });
-      }
 
       if (scrollIndicator) {
         scrollIndicator.addEventListener('click', () => {
@@ -931,6 +934,6 @@ const BASE = '/'; // must match astro.config.mjs base
           });
         }
       });
-    </script>
+    }</script>
   </body>
 </html>

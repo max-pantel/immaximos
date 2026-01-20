@@ -1,5 +1,5 @@
 ---
-// src/pages/work/experimental.astro
+// src/pages/work/other-work.astro
 const BASE = '/'; // must match astro.config.mjs base
 ---
 
@@ -10,7 +10,7 @@ const BASE = '/'; // must match astro.config.mjs base
   <link rel="icon" type="image/svg+xml" href="/favicon.png" />
   <base href={`${BASE}`} />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experimental - maximos 'halbert' pantelidakis</title>
+  <title>Other Work - maximos 'halbert' pantelidakis</title>
   <style>
     * {
       margin: 0;
@@ -342,10 +342,10 @@ const BASE = '/'; // must match astro.config.mjs base
     </header>
 
     <section class="page-header">
-      <h1>Experimental</h1>
-      <p>(page under constructon)</p>
+      <h1>Other Work</h1>
+      <h3>Animations, collages, posters, experimentations</h3>
       <p>  </p>
-      <p>Works inspired by surrealist automatism and DADA. Collage, stop-motion and digital animations. More work will be added here if I ever manage to find my files.</p>
+      <p>Largely inspired by dada and avant-garde. More stuff are going to be added here if I ever manage to find my files.</p>
       <div class="toggle-button">
         <button id="btn-personal" class="active" onclick="showCategory('personal')">Personal</button>
         <button id="btn-commission" onclick="showCategory('commission')">Commission</button>
@@ -357,7 +357,7 @@ const BASE = '/'; // must match astro.config.mjs base
 
     <div class="grid-item widescreen video-container">
       <video id="greeceVideo" autoplay loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-        <source src="/work/experimental/greece.mp4" type="video/mp4">
+        <source src="/work/other-work/greece.mp4" type="video/mp4">
       </video>
         <!-- Overlay -->
       <div class="overlay">
@@ -385,20 +385,20 @@ const BASE = '/'; // must match astro.config.mjs base
       <iframe
       src="https://player.vimeo.com/video/730570976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
       frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+      allow="fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
       title="Language is non-verbal"> 
     </iframe>
     </div>
-    <div class="grid-item"><img src="/work/experimental/child-dreaming.jpg" 
+    <div class="grid-item"><img src="/work/other-work/child-dreaming.jpg" 
       alt="Child Dreaming" 
       style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
-    <div class="grid-item"><img src="/work/experimental/recalling.jpg" 
+    <div class="grid-item"><img src="/work/other-work/recalling.jpg" 
       alt="Recalling" 
       style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
-    <div class="grid-item"><img src="/work/experimental/suffer.jpg" 
+    <div class="grid-item"><img src="/work/other-work/suffer.jpg" 
       alt="May the God of Time Have Mercy on Your Soul" 
       style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
@@ -422,7 +422,7 @@ const BASE = '/'; // must match astro.config.mjs base
     <div class="grid-item">
       <a href="https://www.deviantart.com/maximpantel/art/Atlas-972234938" target="_blank" rel="noopener noreferrer">
       <img 
-      src="/work/experimental/atlas.jpg"
+      src="/work/other-work/atlas.jpg"
       alt="Atlas"
       style="width: 100%; height: 100%; object-fit: cover;">
       </a>
@@ -445,27 +445,39 @@ const BASE = '/'; // must match astro.config.mjs base
     </div>
   </div>
   <div class="grid hidden" id="commissions">
-    
+    <div class="grid-item center-item">
+      <img
+      src="/work/other-work/bolek-lolek.jpg"
+      alt="Bolek Lolek Poster"
+      style="width: 100%; height: 100%; object-fit: scale-down;">
+    </div>
+    <div class="grid-item center-item">
+      <img
+      src="/work/other-work/bolek-lolek-zoomed.jpg"
+      alt="Bolek Lolek Poster"
+      style="width: 100%; height: 100%; object-fit: scale-down;">
+    </div>    
     <div class="grid-item center-item">
       <a href="https://dribbble.com/shots/25009811-Collage-Album-cover-for-an-upcoming-single"
         target="_blank" rel="noopener noreferrer">
         <img
-          src="/work/experimental/redflag.jpg"
+          src="/work/other-work/redflag.jpg"
           alt="Red Flag"
           style="width: 100%; height: 100%; object-fit: cover;">
       </a>
     </div>
     <div class="grid-item widescreen">
       <video id="how-i-made-redflag" muted autoplay loop playsinline style="width: 100%; height: 100%; object-fit: contain;">
-        <source src="/work/experimental/car-redflag.mp4" type="video/mp4">
+        <source src="/work/other-work/car-redflag.mp4" type="video/mp4">
       </video>
     </div>
     <div class="grid-item center-item">
       <img
-      src="/work/experimental/redflag-type.jpg"
+      src="/work/other-work/redflag-type.jpg"
       alt="Red Flag Type"
       style="width: 100%; height: 100%; object-fit: cover;">
     </div>
+
   </div>
 
   <div class="container">
